@@ -21,6 +21,50 @@ More coming soon... v1.0 is just a PoC
 - Visual Basic XOR
 - Cobalt Strike DLLImports (v1.0 acceptable functionality)
 
+## Usage: payloadkit CLI
+
+payloadkit uses the python `typer` module. The tool has three options
+- `ls`
+- `ìnfo`
+- `run`
+
+### `ls`
+
+Something about ls
+
+### ìnfo`
+
+Something about info
+
+### `run`
+
+Something about run
+
+## Usage: Modules
+
+### C++ XOR
+
+````
+# config.yaml for C++ XOR module
+payload: ./path/to/payload.bin
+````
+
+````
+python3 payloadkit.py run cpp.xor config.yaml
+````
+
+### C++ ROT13
+
+````
+# config.yaml for C++ ROT13 module
+````
+
+````
+`python3 payloadkit.py run cpp.rot13 config.yaml
+````
+
+... Continue other modules
+
 ## Directory structure
 
 - modules - directory containing all modules

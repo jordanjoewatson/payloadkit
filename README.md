@@ -7,17 +7,19 @@
    v1.0 @jordanjoewatson
 ````
 
+An offensive security framework for writing payloads
+
 More coming soon... v1.0 is just a PoC
 
 ## Modules
 - C++ XOR
 - C++ ROT13
 - C# XOR
-- C# DLLImports
+- C# DLLImports (v1.0 acceptable functionality)
 - C# AES
 - PowerShell XOR
 - Visual Basic XOR
-- Cobalt Strike DLLImports
+- Cobalt Strike DLLImports (v1.0 acceptable functionality)
 
 ## Directory structure
 

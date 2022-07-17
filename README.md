@@ -1,5 +1,9 @@
 # README
 
+┌─┐┌─┐┬ ┬┬  ┌─┐┌─┐┌┬┐┬┌─┬┌┬┐
+├─┘├─┤└┬┘│  │ │├─┤ ││├┴┐│ │ 
+┴  ┴ ┴ ┴ ┴─┘└─┘┴ ┴─┴┘┴ ┴┴ ┴
+   v1.0 @jordanjoewatson
 
 ## Directory structure
 

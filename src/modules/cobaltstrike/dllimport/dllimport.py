@@ -1,5 +1,4 @@
 from modules.Module import Module
-import yaml
 import os
 import typer
 from utils import load_config

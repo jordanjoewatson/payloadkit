@@ -30,8 +30,8 @@ def load_config(config_filepath):
         exit()
 
 def check_module(module):
-    if not re.match(r"(csharp|powershell|vba|cpp|csharp).[a-zA-Z]+", module):
-        print("Invalid module name, use format <language>.<module>")
+    if not re.match(r"(csharp|powershell|visualbasic|cobaltstrike|cpp|csharp).[a-zA-Z]+", module):
+        print("[!] utils.py: invalid module name, use format <language>.<module>")
         exit()
 
 

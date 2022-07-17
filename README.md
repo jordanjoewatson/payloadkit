@@ -7,6 +7,8 @@
    v1.0 @jordanjoewatson
 ````
 
+More coming soon... v1.0 is just a PoC
+
 ## Modules
 - C++ XOR
 - C++ ROT13

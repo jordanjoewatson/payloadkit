@@ -7,6 +7,16 @@
    v1.0 @jordanjoewatson
 ````
 
+## Modules
+- C++ XOR
+- C++ ROT13
+- C# XOR
+- C# DLLImports
+- C# AES
+- PowerShell XOR
+- Visual Basic XOR
+- Cobalt Strike DLLImports
+
 ## Directory structure
 
 - modules - directory containing all modules

@@ -1,0 +1,23 @@
+import_statements:
+    - api: NtOpenProcess
+      import: |
+        [DllImport("ntdll.dll", SetLastError=true)]
+        static extern NTSTATUS NtOpenProcess(ref IntPtr ProcessHandle, UInt32 AccessMask, ref OBJECT_ATTRIBUTES ObjectAttributes, ref CLIENT_ID ClientId);
+    - api: NtMapViewOfSection
+      import: |
+        [DllImport("ntdll.dll", SetLastError=true)]
+        static extern uint NtMapViewOfSection(
+            IntPtr SectionHandle,
+            IntPtr ProcessHandle,
+            ref IntPtr BaseAddress,
+            UIntPtr ZeroBits,
+            UIntPtr CommitSize,
+            out ulong SectionOffset,
+            out uint ViewSize,
+            uint InheritDisposition,
+            uint AllocationType,
+            uint Win32Protect);
+    - api: NtClose
+      import: |
+        [DllImport("ntdll.dll", ExactSpelling=true, SetLastError=false)]
+        static extern int NtClose(IntPtr hObject);  

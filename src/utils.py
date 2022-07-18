@@ -41,3 +41,16 @@ def get_output_directory(config: str, module: str, time_obj: time.struct_time):
         current_time = time.strftime("%H-%M-%S", time_obj)
         return os.path.join('output', module+'_'+current_time)
     return config.get('output')
+
+def lines(l, language):
+    if language == "csharp":
+        s = ""
+        for itr in range(0, len(l), 200):
+            if itr > 0:
+                s += " +\n"
+            s += "\"{}\"".format(l[itr:itr+200])
+
+        return s
+    else:
+        print("utils.py: Language not implement yet")
+        exit()

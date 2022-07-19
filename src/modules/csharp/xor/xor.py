@@ -24,7 +24,7 @@ class xor(Module):
         
         self.key = config.get('key')
         self.payload = config.get('payload')
-        super().__init__(status=False) # set status to True to indicate the module is usable
+        super().__init__(status=True) # set status to True to indicate the module is usable
 
     def run(self):
 
@@ -64,7 +64,8 @@ class xor(Module):
                 base64EncodedPayload=lines(base64EncodedPayload, language="csharp"),
                 base16EncodedPayload=lines(base16EncodedPayload, language="csharp"),
                 byteArrayInt=intString,
-                byteArrayHex=hexString
+                byteArrayHex=hexString,
+                key=self.key
             )
 
         return [{

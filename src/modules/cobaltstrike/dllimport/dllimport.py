@@ -13,7 +13,7 @@ class dllimport(Module):
 
     def __init__(self, dllimport):
         self.dllimport = dllimport
-        super().__init__(status=False) # set status to True to indicate the module is usable
+        super().__init__(status=True) # set status to True to indicate the module is usable
 
 
     def run(self):

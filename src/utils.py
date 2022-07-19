@@ -51,6 +51,35 @@ def lines(l, language):
             s += "\"{}\"".format(l[itr:itr+200])
 
         return s
+    if language == "powershell":
+        s = ""
+        for itr in range(0, len(l), 200):
+            if itr > 0:
+                s += "+ "
+            s += "\"{}\"`\n".format(l[itr:itr+200])
+        
+        return s[:-2]
     else:
         print("utils.py: Language not implement yet")
         exit()
+
+def create_int_string(payload):
+    intLs = []
+    for i in range(0, len(payload), 50):
+        intLs.append(','.join([
+            str(int(p)) for p in payload[i:i+50]
+        ]) + ',')
+
+    # remove the last character because of the trailint ','
+    intString = '\n'.join(intLs)[:-1]
+    return intString 
+
+def create_hex_string(payload):
+    hexLs = []
+    for i in range(0, len(payload), 50):
+        hexLs.append(','.join([
+            str(hex(p)) for p in payload[i:i+50]
+        ]) + ',')
+
+    hexString = '\n'.join(hexLs)[:-1]
+    return hexString

@@ -58,32 +58,35 @@ class aes(Module):
         payload = cipher.encrypt(pad(payload, 16))
 
         base64EncodedPayload = (b64encode(payload)).decode('utf-8')
+        base64EncodedHash = (b64encode(bytehash)).decode('utf-8')
+        base64EncodedIV = (b64encode(byteiv)).decode('utf-8')
         base16EncodedPayload = payload.hex()
+        base16EncodedHash = bytehash.hex()
+        base16EncodedIV = byteiv.hex()
 
-        intLs = []
-        for i in range(0, len(payload), 50):
-            intLs.append(','.join([
-                str(int(p)) for p in payload[i:i+50]
-            ]) + ',')
+        byteArrayInt = self.create_int_string(payload)
+        byteHashInt = self.create_int_string(bytehash)
+        byteIVInt = self.create_int_string(byteiv)
 
-        # remove the last character because of the trailint ','
-        intString = '\n'.join(intLs)[:-1]
-
-        hexLs = []
-        for i in range(0, len(payload), 50):
-            hexLs.append(','.join([
-                str(hex(p)) for p in payload[i:i+50]
-            ]) + ',')
-
-        hexString = '\n'.join(hexLs)[:-1]
+        byteArrayHex = self.create_hex_string(payload)
+        byteHashHex = self.create_hex_string(bytehash)
+        byteIVHex = self.create_hex_string(byteiv)
 
         with open(os.path.join('modules','csharp','aes','template.cs')) as fh:
             template = Template(fh.read())
             csharp_code = template.render(
                 base64EncodedPayload=lines(base64EncodedPayload, language="csharp"),
+                base64EncodedHash=base64EncodedHash,
+                base64EncodedIV=base64EncodedIV,
                 base16EncodedPayload=lines(base16EncodedPayload, language="csharp"),
-                byteArrayInt=intString,
-                byteArrayHex=hexString
+                base16EncodedHash=base16EncodedHash,
+                base16EncodedIV=base16EncodedIV,
+                byteArrayInt=byteArrayInt,
+                byteHashInt=byteHashInt,
+                byteIVInt=byteIVInt,
+                byteArrayHex=byteArrayHex,
+                byteHashHex=byteHashHex,
+                byteIVHex=byteIVHex
             )
 
         # write out an encrypted payload binary
@@ -102,3 +105,22 @@ class aes(Module):
             'type': 'binary'
         }]
 
+    def create_hex_string(self, payload):
+        hexLs = []
+        for i in range(0, len(payload), 50):
+            hexLs.append(','.join([
+                str(hex(p)) for p in payload[i:i+50]
+            ]) + ',')
+
+        return '\n'.join(hexLs)[:-1]
+
+        
+    def create_int_string(self, payload):
+        intLs = []
+        for i in range(0, len(payload), 50):
+            intLs.append(','.join([
+                str(int(p)) for p in payload[i:i+50]
+            ]) + ',')
+
+        # remove the last character because of the trailint ','
+        return '\n'.join(intLs)[:-1]

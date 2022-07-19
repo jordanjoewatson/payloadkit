@@ -1,63 +1,41 @@
-
-$bytes = [System.IO.File]::ReadAllBytes("C:\\Users\\jord\\Desktop\\iexplore.exe")
-$bytes2 = [System.Byte[]]::CreateInstance([System.Byte], $bytes.count)
-
-
-
-for($i=0; $i -lt $bytes.count ; $i++)
-{
-    $bytes2[$i] = $bytes[$i] -bxor 0x6A
-}
-
-echo $bytes[-1]
-echo $bytes2[-1]
-$b = [bool]($bytes -eq $bytes2)
-echo $b
-
-
-for($i=0; $i -lt $bytes.count ; $i++)
-{
-    $bytes2[$i] = $bytes2[$i] -bxor 0x6A
-}
-
-$c = [bool]($bytes -eq $bytes2)
-echo $c
-
-echo $bytes[-1]
-echo $bytes2[-1]
-
-echo $bytes.count
-
-echo $bytes2.count 
-
-for($i=0; $i -lt $bytes.count ; $i++)
-{
-    if ( $bytes[$i] -ne $bytes2[$i] )
-    {
-        Write-Output "Error"
-    }
-}
-
-
-$EncodedText =[Convert]::ToBase64String($Bytes)
-$EncodedText
-
-# actual working stuff to submit from here, above is just test code
-
-# PowerShell encoded payload base64
+# Base64 encoded payload
+$base64EncodedPayload = {{ base64EncodedPayload }}
+$base64EncodedXORKey = {{ base64EncodedXORKey }}
 
 # PowerShell decode Base64 to byte array
-[System.Convert]::FromBase64String("U29tZSBEYXRh")
-[System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($EncodedText))
+$shellcode = [System.Convert]::FromBase64String($base64EncodedPayload)
+
+# PowerShell decode base64 if dealing with strings and not binary
+$plaintextshellcode = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($base64EncodedPayload))
 
 # PowerShell encoded payload base16
+$base16EncodedPayload = {{ base16EncodedPayload }}
+$base16EncodedXORKey = {{ base16EncodedXORKey }}
 
-# PowerShelk decode base16 to byte array
+# PowerShell decode base16 to byte array
+function base16StringToByteArray {
+
+    Param(
+        [parameter(Mandatory=$true)]
+        [String]
+        $base16EncodedPayload
+    )
+
+    $result = $base16EncodedPayload -split '(..)' -ne ''
+    $bytearr = [byte[]]::new($base16EncodedPayload.Length / 2)
+    for ($itr = 0 ; $itr -lt $result.Length ; $itr++)
+    {
+        $bytearr[$itr] = [convert]::ToByte($result[$itr], 16)
+    }
+    return $bytearr
+}
+
+# One liner decode base16 to bytearray
 
 # PowerShell byte array
-[byte[]] $byte_array = 65,66,67,90
+[byte[]] $intArray = {{ intArray }}
 
-[byte[]] $another_array = 0x41, 0x42, 0x43, 0x5A
+[byte[]] $hexArray = {{ hexArray }}
 
 
 # PowerShell XOR Function
@@ -70,14 +48,24 @@ function xor {
 
     Param(
         [parameter(Mandatory=$true)]
-        [Byte]
+        [Byte[]]
         $xorValue 
     )
 
     for($i=0; $i -lt $bytes.count ; $i++)
     {
-        $bytes[$i] = $bytes[$i] -bxor $xorValue 
+        $keyItr = $i % $xorValue.Length;
+        $bytes[$i] = $bytes[$i] -bxor $xorValue[$keyItr]
     }
 
     return $bytes
 }
+
+$xorStringValue = "{{ xorStringValue }}"
+$xorIntArray = {{ xorIntArray }}
+$xorHexArray = {{ xorHexArray }}
+
+# XOR One liner
+# $bytes is a byte array of the payload
+# $xorValue is a byte array of the XOR key
+for ($i=0; $i -lt $bytes.count ; $i++) {  $keyItr = $i % $xorValue.Length; $bytes[$i] = $bytes[$i] -bxor $xorValue[$keyItr] }

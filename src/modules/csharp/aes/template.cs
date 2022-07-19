@@ -1,7 +1,7 @@
 // CSharp encoded payload base64
 string base64EncodedPayload = {{ base64EncodedPayload }};
-string base64EncodedHash = {{ base64EncodedHash }};
-string base64EncodedIV = {{ base64EncodedIV }};
+string base64EncodedHash = "{{ base64EncodedHash }}";
+string base64EncodedIV = "{{ base64EncodedIV }}";
 
 
 // CSharp decode Base64 to byte array
@@ -14,8 +14,8 @@ byte[] iv = Convert.FromBase64String(base64EncodedIV);
 
 // CSharp encoded payload base16
 string base16EncodedPayload = {{ base16EncodedPayload }};
-string base16EncodedHash = {{ base16EncodedHash }};
-string base16EncodedIV = {{ base16EncodedIV }};
+string base16EncodedHash = "{{ base16EncodedHash }}";
+string base16EncodedIV = "{{ base16EncodedIV }}";
 
 
 

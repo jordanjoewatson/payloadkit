@@ -7,7 +7,7 @@ import os
 from pathlib import Path 
 import yaml
 import time 
-from utils import log, get_time, load_config, check_module, get_output_directory
+from misc.utils import log, get_time, load_config, check_module, get_output_directory
 
 banner = """
 ┌─┐┌─┐┬ ┬┬  ┌─┐┌─┐┌┬┐┬┌─┬┌┬┐

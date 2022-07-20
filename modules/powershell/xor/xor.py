@@ -3,7 +3,7 @@ from utils import create_hex_string, create_int_string
 from base64 import b64encode 
 import os 
 from jinja2 import Template 
-from utils import lines 
+from misc.utils import lines 
 
 class xor(Module):
 

@@ -4,7 +4,7 @@ from Crypto.Util.Padding import pad
 import random 
 from string import ascii_letters, digits, punctuation
 from base64 import b64encode 
-from utils import lines
+from misc.utils import lines
 import os
 from jinja2 import Template
 

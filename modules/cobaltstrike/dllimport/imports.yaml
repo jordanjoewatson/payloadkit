@@ -1,0 +1,25 @@
+import_statements:
+- api: mciSendStringA
+  import: |
+    DECLSPEC_IMPORT WINBASEAPI DWORD WINAPI WINMM$mciSendStringA (CHAR*, CHAR*, DWORD, DWORD);
+- api: GetSystemTime
+  import: |
+    DECLSPEC_IMPORT WINBASEAPI VOID WINAPI KERNEL32$GetSystemTime (SYSTEMTIME*);
+- api: GetLocalTime
+  import: |
+    DECLSPEC_IMPORT WINBASEAPI VOID WINAPI KERNEL32$GetLocalTime (SYSTEMTIME*);
+- api: FileTimeToSystemTime
+  import: |
+    DECLSPEC_IMPORT WINBASEAPI INT WINAPI KERNEL32$FileTimeToSystemTime (FILETIME*, SYSTEMTIME*);
+- api: SystemTimeToFileTime
+  import: |
+    DECLSPEC_IMPORT WINBASEAPI INT WINAPI KERNEL32$SystemTimeToFileTime (SYSTEMTIME*, FILETIME*);
+- api: strlen
+  import: |
+    WINBASEAPI size_t __cdecl MSVCRT$strlen (const char *str);
+- api: malloc
+  import: |
+    WINBASEAPI void* WINAPI MSVCRT$malloc(SIZE_T);
+- api: strcat
+  import: |
+    WINBASEAPI char WINAPI MSVCRT$strcat(char *destination, const char *source);

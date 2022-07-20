@@ -2,15 +2,14 @@ from modules.Module import Module
 from jinja2 import Template 
 import os
 from base64 import b64encode
-from utils import lines
+from misc.utils import lines
 
 """
-Need to add options somehow
+https://stackoverflow.com/questions/44027725/urldownloadtofile-to-memory
 """
-class xor(Module):
+class lsbsteg(Module):
 
     options = {
-        'key': { 'desc': 'key used to encrypt payload', 'required': True },
         'payload': { 'desc': 'Payload to encode', 'required': True },
         'output': { 'desc': 'directory to write files to, otherwise writes to, otherwise writes files to ./output/', 'required': False }
     }
@@ -18,13 +17,12 @@ class xor(Module):
     input_type = "yaml"
     module_type = "payload" # change this to something else
 
-    description = """XOR Encryption module for C#, returns a base64, base16 and binary version of the provided payload with a C# decryption function"""
+    description = """LSB Steganography obfuscation module for C#, returns a base64, base16 and binary version of the provided payload with a C# decryption function and image need to fix this string"""
 
     def __init__(self, config):
         
-        self.key = config.get('key')
         self.payload = config.get('payload')
-        super().__init__(status=True) # set status to True to indicate the module is usable
+        super().__init__(status=False) # set status to True to indicate the module is usable
 
     def run(self):
 

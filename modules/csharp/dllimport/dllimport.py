@@ -2,7 +2,7 @@ from modules.Module import Module
 import yaml
 import os
 import typer
-from utils import load_config
+from misc.utils import load_config
 
 """
 Need to add options somehow

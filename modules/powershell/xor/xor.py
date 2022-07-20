@@ -1,5 +1,5 @@
 from modules.Module import Module
-from utils import create_hex_string, create_int_string
+from misc.utils import create_hex_string, create_int_string
 from base64 import b64encode 
 import os 
 from jinja2 import Template 

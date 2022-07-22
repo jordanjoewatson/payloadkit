@@ -23,3 +23,24 @@ import_statements:
 - api: strcat
   import: |
     WINBASEAPI char WINAPI MSVCRT$strcat(char *destination, const char *source);
+- api: NetUserAdd
+  import: |
+    DECLSPEC_IMPORT NET_API_STATUS WINAPI NETAPI32$NetUserAdd(LPWSTR,DWORD,LPBYTE,LPDWORD);
+- api: CreateFileA
+  import: |
+      WINBASEAPI HANDLE WINAPI KERNEL32$CreateFileA (LPCWSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);
+- api: CloseHandle
+  import: |
+    WINBASEAPI HANDLE WINAPI KERNEL32$CloseHandle (HANDLE hObject); 
+- api: GetFileSize
+  import: |
+    WINBASEAPI HANDLE WINAPI KERNEL32$GetFileSize (HANDLE hFile, LPDWORD lpFileSizeHigh); 
+- api: ReadFile
+  import: |
+    DECLSPEC_IMPORT WINBASEAPI BOOL WINAPI KERNEL32$ReadFile (HANDLE, PVOID, DWORD, PDWORD, LPOVERLAPPED);
+- api: WriteFile
+  import: |
+    DECLSPEC_IMPORT WINBASEAPI BOOL WINAPI KERNEL32$WriteFile (HANDLE, PVOID, DWORD, PDWORD, LPOVERLAPPED);
+- api: strcmp
+  import: |
+    WINBASEAPI int __cdecl MSVCRT$strcmp (const char* str1, const char* str2);

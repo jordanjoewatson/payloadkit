@@ -1,47 +1,13 @@
-#include <iostream>
-
-// BYTE DATA
-
-unsigned char bytes[]=0x43,0x4d,0x30,0x30,0x0f,0x0D};
-
-// BYTE STRING
-
-unsigned char data[4]="\x41\x41\x41\x41";
-
-// BASE64 data
-
-char* base64_payload;
-
-int xor_base64()
-{
-  // example code placeholder
-}
-
-// BASE16 data
-
-char* base16_payload;
-
-int xor_base16()
-{
-  // example code placeholder
-}
-
-
-// C++ XOR Code 
-
 #include <windows.h>
 #include <iostream>
 
 using namespace std;
 
-
-void _xor(unsigned char* bytes, unsigned char* xorKey, int byteCount)
+void rot13(unsigned char* bytes, int byteCount)
 {
-    int xorKeyCount = *(&xorKey + 1) - xorKey;
     for (int i = 0 ; i < byteCount ; i++)
     {
-        int keyItr = i % xorKeyCount;
-        *bytes ^= xorKey[keyItr];
+        *bytes = (*bytes - 13) % 256;
         bytes++;
     }
     return;
@@ -54,10 +20,11 @@ int main()
     cptr = shellcode;
     unsigned char key[] = "\xFF\0xFF\xfF";
     int byteCount = *(&shellcode + 1) - shellcode;
-	  _xor(cptr, key, byteCount);
+	//_xor(cptr, key, byteCount);
+
+    rot13(cptr, byteCount);
     std::cout << (int)shellcode[0] << std::endl;
     cptr = shellcode;
-    _xor(cptr, key, byteCount);
 	
     std::cout << (int)shellcode[0] << std::endl;
     

@@ -55,7 +55,7 @@ def lines(l, language):
         s = ""
         for itr in range(0, len(l), 200):
             if itr > 0:
-                s += ", "
+                s += "+ "
             s += "\"{}\"`\n".format(l[itr:itr+200])
         
         return s[:-2]

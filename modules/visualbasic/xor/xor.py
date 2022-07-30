@@ -1,5 +1,9 @@
 from modules.Module import Module
-
+from misc.utils import create_hex_string, create_int_string
+from base64 import b64encode 
+import os 
+from jinja2 import Template 
+from misc.utils import lines 
 class xor(Module):
 
     options = {
@@ -21,23 +25,54 @@ class xor(Module):
         super().__init__(status=False) # set status to True to indicate the module is usable
 
     def run(self):
-        
-        function_string = "test()"
-        encrypted_payload = b'11000010'
 
-        # write out an encrypted payload binary
-        # write out function data into the cs code containing, base64 encoded payload and arguments with a base64 function
-        # a base16 encoded payload and arguments with a base16 function
-        # all of these are separated by a ############# line with a comment detailing what's happening
+        payload_fh = open(self.payload, 'rb')
+        payload = payload_fh.read()
+        payload_fh.close() 
 
-        # pass data back in specific format to be written out to directory
+        payload = bytearray(payload)
+        bytekey = bytearray(self.key, 'utf-8')
+        for i in range(0, len(payload)):
+            payload[i] ^= bytekey[i % len(bytekey)]
+
+        base64EncodedPayload = (b64encode(payload)).decode('utf-8')
+        base16EncodedPayload = payload.hex()
+
+        intLs = []
+        for i in range(0, len(payload), 50):
+            intLs.append(','.join([
+                str(int(p)) for p in payload[i:i+50]
+            ]) + ',')
+
+        # remove the last character because of the trailint ','
+        intString = '\n'.join(intLs)[:-1]
+
+        hexLs = []
+        for i in range(0, len(payload), 50):
+            hexLs.append(','.join([
+                str(hex(p)) for p in payload[i:i+50]
+            ]) + ',')
+
+        hexString = '\n'.join(hexLs)[:-1]
+
+
+        with open(os.path.join('modules','visualbasic','xor','template.vba')) as fh:
+            template = Template(fh.read())
+            vba_code = template.render(
+                base64EncodedPayload=lines(base64EncodedPayload, language="visualbasic"),
+                base16EncodedPayload=lines(base16EncodedPayload, language="visualbasic"),
+                intArray=intString,
+                hexArray=hexString,
+                key=self.key
+            )
+
         return [{
-            'filename': 'vb_code.vb',
-            'data': function_string,
+            'filename': 'vba_code.vba',
+            'data': vba_code,
             'type': 'text'
         }, {
             'filename': 'encrypted_payload.bin',
-            'data': encrypted_payload,
+            'data': payload,
             'type': 'binary'
         }]
 

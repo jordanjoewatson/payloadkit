@@ -55,12 +55,20 @@ def lines(l, language):
         s = ""
         for itr in range(0, len(l), 200):
             if itr > 0:
-                s += "+ "
+                s += ", "
             s += "\"{}\"`\n".format(l[itr:itr+200])
         
         return s[:-2]
+    if language == "visualbasic":
+        s = ""
+        for itr in range(0, len(l), 200):
+            if itr > 0:
+                s += "encodedShellcode = encodedShellcode & "
+            s += "\"{}\"\n".format(l[itr:itr+200])
+        
+        return s
     else:
-        print("utils.py: Language not implement yet")
+        print("utils.py: Language {} not implement yet".format(language))
         exit()
 
 def create_int_string(payload):

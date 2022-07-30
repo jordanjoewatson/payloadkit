@@ -53,6 +53,7 @@ byte[] byteIVHex = { {{ byteIVHex }} };
 
 
 // CSharp AES Function
+using System.IO;
 using System.Security.Cryptography;
 static byte[] aes(byte[] bs, byte[] hash, byte[] iv)
 {

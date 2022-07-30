@@ -28,7 +28,7 @@ class aes(Module):
 
         self.blocksize = config.get('blocksize')
         self.payload = config.get('payload')
-        super().__init__(status=False) # set status to True to indicate the module is usable
+        super().__init__(status=True) # set status to True to indicate the module is usable
 
     def get_hashlength(self):
         if self.blocksize == "AES-128":

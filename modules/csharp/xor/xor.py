@@ -35,7 +35,7 @@ class xor(Module):
         payload = bytearray(payload)
         bytekey = bytearray(self.key, 'utf-8')
         for i in range(0, len(payload)):
-            payload[i] ^= i % len(bytekey)
+            payload[i] ^= bytekey[i % len(bytekey)]
 
         base64EncodedPayload = (b64encode(payload)).decode('utf-8')
         base16EncodedPayload = payload.hex()

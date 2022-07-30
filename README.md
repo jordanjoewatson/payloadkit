@@ -7,19 +7,21 @@
    v1.0 @jordanjoewatson
 ````
 
-An offensive security framework for writing payloads
+An offensive security framework for writing payloads.
 
-More coming soon... v1.0 is just a PoC
+Purpose of the framework is to take a payload, e.g. an msfvenom binary and generates various mutations of the payload depending on the module. For example, the C# AES module will create base16, base64, hex and int versions of the payloads, and provides C# functions to decrypt the encrypted payload. These generated segments of code can easily be added into a payload.
+
+More modules soon.
 
 ## Modules
 - C++ XOR
 - C++ ROT13
 - C# XOR
-- C# DLLImports (v1.0 acceptable functionality)
+- C# DLLImports (limited imports available)
 - C# AES
 - PowerShell XOR
 - Visual Basic XOR
-- Cobalt Strike DLLImports (v1.0 acceptable functionality)
+- Cobalt Strike DLLImports (limited imports available)
 
 ## Usage: payloadkit CLI
 
@@ -30,17 +32,29 @@ payloadkit uses the python `typer` module. The tool has three options
 
 ### `ls`
 
-Something about ls
+````
+python3 payloadkit.py ls
+````
 
-### ìnfo`
+Lists all modules available
 
-Something about info
+### `info`
+
+````
+python3 payloadkit.py info <modulename>
+````
+
+Prints out information on module, such as arguments required and description of module
 
 ### `run`
 
-Something about run
+````
+python3 payloadkit.py run <modulename> [YAML/Args]
+````
 
 ## Usage: Modules
+
+Some modules require a string argument, some modules require a YAML file
 
 ### C++ XOR
 
@@ -63,11 +77,28 @@ python3 payloadkit.py run cpp.xor config.yaml
 `python3 payloadkit.py run cpp.rot13 config.yaml
 ````
 
-... Continue other modules
+### C# AES
 
-## Directory structure
+Config
+````
+blocksize: AES-256
+payload: /path/to/payload.bin
+````
 
-- modules - directory containing all modules
+Run
+````
+python3 payloadkit.py run csharp.aes aes.yaml
+````
 
-Each module is listed in modules.language.modulename
-Under each module directory the modulename.py file should contain a class of Modulename which has a class run(). the run function accepts the arguments of the module passed in from the command line, this will then run the function, and write a directory containing all of the files output for the module
+### C# XOR
+
+Config
+````
+key: this is my XOR key
+payload: /path/to/payload.bin
+````
+
+Run
+````
+python3 payloadkit.py run csharp.xor xor.yaml
+````

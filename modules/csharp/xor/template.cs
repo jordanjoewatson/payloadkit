@@ -58,5 +58,5 @@ static byte[] xor(byte[] bs, byte[] key)
 }
 
 
-byte[] byteKey = Encoding.ASCII.GetBytes({{ key }});
+byte[] byteKey = Encoding.ASCII.GetBytes("{{ key }}");
 byte[] shellcode = xor(encodedByteArray, byteKey);

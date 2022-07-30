@@ -90,6 +90,15 @@ Run
 python3 payloadkit.py run csharp.aes aes.yaml
 ````
 
+### C# DllImports
+
+Fetches DllImport statements to use in payloads, doesn't require a YAML file. Only a few imports are currently available but planning to add more with time
+
+Run
+````
+python3 payloadkit.py run cobaltstrike.dllimport malloc
+````
+
 ### C# XOR
 
 Config
@@ -114,4 +123,13 @@ payload: /path/to/payload.bin
 Run
 ````
 python3 payloadkit.py run powershell.xor xor.yaml
+````
+
+### Cobalt Strike DllImports
+
+Fetches DllImport statements to use in payloads, doesn't require a YAML file. Only a few imports are currently available but planning to add more with timeS
+
+Run
+````
+python3 payloadkit.py run cobaltstrike.dllimport malloc
 ````

@@ -23,6 +23,14 @@ More modules soon.
 - Visual Basic XOR
 - Cobalt Strike DLLImports (limited imports available)
 
+## Setup
+
+````
+python3 -m venv ./venv
+source venv/bin/activate
+pip3 install -r requirements
+python3 payloadkit.py
+````
 ## Usage: payloadkit CLI
 
 payloadkit uses the python `typer` module. The tool has three options

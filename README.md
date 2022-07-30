@@ -102,3 +102,16 @@ Run
 ````
 python3 payloadkit.py run csharp.xor xor.yaml
 ````
+
+### PowerShell XOR
+
+Config
+````
+key: this is my XOR key
+payload: /path/to/payload.bin
+````
+
+Run
+````
+python3 payloadkit.py run powershell.xor xor.yaml
+````

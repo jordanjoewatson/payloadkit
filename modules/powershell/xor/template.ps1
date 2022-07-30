@@ -3,7 +3,7 @@ $base64EncodedPayload = {{ base64EncodedPayload }}
 $base64EncodedXORKey = {{ base64EncodedXORKey }}
 
 # PowerShell decode Base64 to byte array
-$shellcode = [System.Convert]::FromBase64String($base64EncodedPayload)
+[byte[]] $shellcode = [System.Convert]::FromBase64String($base64EncodedPayload)
 
 # PowerShell decode base64 if dealing with strings and not binary
 $plaintextshellcode = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($base64EncodedPayload))
@@ -31,6 +31,7 @@ function base16StringToByteArray {
 }
 
 # One liner decode base16 to bytearray
+[byte[]] $shellcode = base16StringToByteArray $base16EncodedPayload
 
 # PowerShell byte array
 [byte[]] $intArray = {{ intArray }}
@@ -39,20 +40,9 @@ function base16StringToByteArray {
 
 
 # PowerShell XOR Function
-function xor {
-    Param(
-        [parameter(Mandatory=$true)]
-        [Byte[]]
-        $byteArray 
-    )
+function xor ($bytes, $xorValue) {
 
-    Param(
-        [parameter(Mandatory=$true)]
-        [Byte[]]
-        $xorValue 
-    )
-
-    for($i=0; $i -lt $bytes.count ; $i++)
+    for($i=0; $i -lt $bytes.Length ; $i++)
     {
         $keyItr = $i % $xorValue.Length;
         $bytes[$i] = $bytes[$i] -bxor $xorValue[$keyItr]
@@ -62,10 +52,10 @@ function xor {
 }
 
 $xorStringValue = "{{ xorStringValue }}"
-$xorIntArray = {{ xorIntArray }}
-$xorHexArray = {{ xorHexArray }}
+[byte[]] $xorIntArray = {{ xorIntArray }}
+[byte[]] $xorHexArray = {{ xorHexArray }}
 
 # XOR One liner
 # $bytes is a byte array of the payload
 # $xorValue is a byte array of the XOR key
-for ($i=0; $i -lt $bytes.count ; $i++) {  $keyItr = $i % $xorValue.Length; $bytes[$i] = $bytes[$i] -bxor $xorValue[$keyItr] }
+for($i=0; $i -lt $bytes.Length ; $i++) { $keyItr = $i % $xorValue.Length; $bytes[$i] = $bytes[$i] -bxor $xorValue[$keyItr] }

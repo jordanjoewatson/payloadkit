@@ -71,23 +71,42 @@ def lines(l, language):
         print("utils.py: Language {} not implement yet".format(language))
         exit()
 
-def create_int_string(payload):
+def create_int_string(payload, language=None):
     intLs = []
-    for i in range(0, len(payload), 50):
-        intLs.append(','.join([
-            str(int(p)) for p in payload[i:i+50]
-        ]) + ',')
 
-    # remove the last character because of the trailint ','
-    intString = '\n'.join(intLs)[:-1]
+    if language == "visualbasic":
+
+        for i in range(0, len(payload), 50):
+            intLs.append(",".join([
+                str(int(p)) for p in payload[i:i+50]
+            ]))
+        intString = ", _\n".join(intLs)
+    else:
+        for i in range(0, len(payload), 50):
+            intLs.append(','.join([
+                str(int(p)) for p in payload[i:i+50]
+            ]) + ',')
+
+        # remove the last character because of the trailint ','
+        intString = '\n'.join(intLs)[:-1]
     return intString 
 
-def create_hex_string(payload):
+def create_hex_string(payload, language=None):
     hexLs = []
-    for i in range(0, len(payload), 50):
-        hexLs.append(','.join([
-            str(hex(p)) for p in payload[i:i+50]
-        ]) + ',')
 
-    hexString = '\n'.join(hexLs)[:-1]
+    if language == "visualbasic":
+
+        for i in range(0, len(payload), 50):
+            hexLs.append(",".join([
+                "&H" + str(hex(p)[2:]) for p in payload[i:i+50]
+            ]))
+        hexString = ", _\n".join(hexLs)
+    else:
+        for i in range(0, len(payload), 50):
+            hexLs.append(','.join([
+                str(hex(p)) for p in payload[i:i+50]
+            ]) + ',')
+
+        # remove the last character because of the trailint ','
+        hexString = '\n'.join(hexLs)[:-1]
     return hexString

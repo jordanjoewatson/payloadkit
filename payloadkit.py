@@ -10,11 +10,11 @@ import time
 from misc.utils import log, get_time, load_config, check_module, get_output_directory
 
 banner = """
-┌─┐┌─┐┬ ┬┬  ┌─┐┌─┐┌┬┐┬┌─┬┌┬┐
-├─┘├─┤└┬┘│  │ │├─┤ ││├┴┐│ │ 
-┴  ┴ ┴ ┴ ┴─┘└─┘┴ ┴─┴┘┴ ┴┴ ┴
+  ┌─┐┌─┐┬ ┬┬  ┌─┐┌─┐┌┬┐┬┌─┬┌┬┐
+  ├─┘├─┤└┬┘│  │ │├─┤ ││├┴┐│ │ 
+  ┴  ┴ ┴ ┴ ┴─┘└─┘┴ ┴─┴┘┴ ┴┴ ┴
 
-   v1.0 @jordanjoewatson
+     v1.0 @jordanjoewatson
 """
 
 

@@ -89,7 +89,7 @@ def create_int_string(payload, language=None):
                 str(int(p)) for p in payload[i:i+50]
             ]))
         intString = ", _\n".join(intLs)
-    if language == "cpp":
+    elif language == "cpp":
         for i in range(0, len(payload), 50):
             intLs.append(",".join([
                 str(int(p)) for p in payload[i:i+50]
@@ -115,7 +115,7 @@ def create_hex_string(payload, language=None):
                 "&H" + str(hex(p)[2:]) for p in payload[i:i+50]
             ]))
         hexString = ", _\n".join(hexLs)
-    if language == "cpp":
+    elif language == "cpp":
 
         for i in range(0, len(payload), 50):
             hexLs.append(",".join([

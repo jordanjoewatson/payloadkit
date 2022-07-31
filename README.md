@@ -66,23 +66,27 @@ Some modules require a string argument, some modules require a YAML file
 
 ### C++ XOR
 
+Config
 ````
-# config.yaml for C++ XOR module
+key: this is my key
 payload: ./path/to/payload.bin
 ````
 
+Run
 ````
-python3 payloadkit.py run cpp.xor config.yaml
+python3 payloadkit.py run cpp.xor xor.yaml
 ````
 
 ### C++ ROT13
 
+Config
 ````
-# config.yaml for C++ ROT13 module
+payload: /path/to/payload.bin
 ````
 
+Run
 ````
-`python3 payloadkit.py run cpp.rot13 config.yaml
+`python3 payloadkit.py run cpp.rot13 rot13.yaml
 ````
 
 ### C# AES

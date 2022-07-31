@@ -67,6 +67,14 @@ def lines(l, language):
             s += "\"{}\"\n".format(l[itr:itr+200])
         
         return s
+    if language == "cpp":
+        s = ""
+        for itr in range(0, len(l), 200):
+            if itr > 0:
+                pass
+            s += "\"{}\"".format(l[itr:itr+200])
+        s += ";"
+        return s
     else:
         print("utils.py: Language {} not implement yet".format(language))
         exit()
@@ -81,6 +89,12 @@ def create_int_string(payload, language=None):
                 str(int(p)) for p in payload[i:i+50]
             ]))
         intString = ", _\n".join(intLs)
+    if language == "cpp":
+        for i in range(0, len(payload), 50):
+            intLs.append(",".join([
+                str(int(p)) for p in payload[i:i+50]
+            ]))
+        intString = "{" + ",\n".join(intLs) + "}"
     else:
         for i in range(0, len(payload), 50):
             intLs.append(','.join([
@@ -101,6 +115,13 @@ def create_hex_string(payload, language=None):
                 "&H" + str(hex(p)[2:]) for p in payload[i:i+50]
             ]))
         hexString = ", _\n".join(hexLs)
+    if language == "cpp":
+
+        for i in range(0, len(payload), 50):
+            hexLs.append(",".join([
+                 str(hex(p)) for p in payload[i:i+50]
+            ]))
+        hexString = "{" + ", _\n".join(hexLs) + "}"
     else:
         for i in range(0, len(payload), 50):
             hexLs.append(','.join([

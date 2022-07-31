@@ -45,13 +45,16 @@ def run(module: str, arg: str):
             typer.echo(typer.style("[!] Error in check requirements for config {}\n".format(arg), fg=typer.colors.RED, bold=True))
             exit()
 
+        if not os.path.exists('./output'):
+            os.mkdir('./output')
+            
         output_directory = get_output_directory(yaml_config, language+'_'+module, time_obj)
         os.mkdir(output_directory)
 
         log("Running module {} on config {}".format(language+'.'+module, arg), time_obj, logfile=True)
         output_data = cls.run()
 
-        log("Writing out files to: " + output_directory, time_obj, logfile=True)
+        log("Writing out files to: " + output_directory + "\n", time_obj, logfile=True)
         for dct in output_data:
 
             output_type = dct['type']

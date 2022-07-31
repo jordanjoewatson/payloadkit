@@ -32,29 +32,16 @@ class xor(Module):
 
         payload = bytearray(payload)
         bytekey = bytearray(self.key, 'utf-8')
+
+        print(payload.hex())
         for i in range(0, len(payload)):
             payload[i] ^= bytekey[i % len(bytekey)]
 
         base64EncodedPayload = (b64encode(payload)).decode('utf-8')
         base16EncodedPayload = payload.hex()
 
-        intLs = []
-        for i in range(0, len(payload), 50):
-            intLs.append(','.join([
-                str(int(p)) for p in payload[i:i+50]
-            ]) + ',')
-
-        # remove the last character because of the trailint ','
-        intString = '\n'.join(intLs)[:-1]
-
-        hexLs = []
-        for i in range(0, len(payload), 50):
-            hexLs.append(','.join([
-                str(hex(p)) for p in payload[i:i+50]
-            ]) + ',')
-
-        hexString = '\n'.join(hexLs)[:-1]
-
+        intString = create_int_string(payload, language="visualbasic")
+        hexString = create_hex_string(payload, language="visualbasic")
 
         with open(os.path.join('modules','visualbasic','xor','template.vba')) as fh:
             template = Template(fh.read())
@@ -63,7 +50,12 @@ class xor(Module):
                 base16EncodedPayload=lines(base16EncodedPayload, language="visualbasic"),
                 intArray=intString,
                 hexArray=hexString,
-                key=self.key
+                key=self.key,
+                xorStringValue=self.key,
+                xorIntArray=create_int_string(bytekey, language="visualbasic"),
+                xorHexArray=create_hex_string(bytekey, language="visualbasic"),
+                byteCount=int(len(base16EncodedPayload)/2)-1,
+                xorByteCount=len(self.key)
             )
 
         return [{
@@ -75,4 +67,3 @@ class xor(Module):
             'data': payload,
             'type': 'binary'
         }]
-

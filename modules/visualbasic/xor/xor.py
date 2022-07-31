@@ -22,7 +22,7 @@ class xor(Module):
 
         self.key = config.get('key')
         self.payload = config.get('payload')
-        super().__init__(status=False) # set status to True to indicate the module is usable
+        super().__init__(status=True) # set status to True to indicate the module is usable
 
     def run(self):
 

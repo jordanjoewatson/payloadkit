@@ -141,3 +141,16 @@ Run
 ````
 python3 payloadkit.py run cobaltstrike.dllimport malloc
 ````
+
+### Visual Basic XOR
+
+Config 
+````
+key: this is my XOR key
+payload: /path/to/payload.bin
+````
+
+Run 
+````
+python3 payloadkit.py run visualbasic.xor xor.yaml
+````

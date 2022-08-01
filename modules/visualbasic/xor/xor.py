@@ -33,7 +33,6 @@ class xor(Module):
         payload = bytearray(payload)
         bytekey = bytearray(self.key, 'utf-8')
 
-        print(payload.hex())
         for i in range(0, len(payload)):
             payload[i] ^= bytekey[i % len(bytekey)]
 

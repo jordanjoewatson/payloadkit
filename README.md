@@ -9,7 +9,7 @@
 
 An offensive security framework for writing payloads.
 
-Purpose of the framework is to take a payload, e.g. an msfvenom binary and generates various mutations of the payload depending on the module. For example, the C# AES module will create base16, base64, hex and int versions of the payloads, and provides C# functions to decrypt the encrypted payload. These generated segments of code can easily be added into a payload.
+Purpose of the framework is to take a binary, the tool then generates various mutations of the binary depending on the module. For example, the C# AES module will create base16, base64, hex and int versions, and provides C# functions to decrypt the encrypted binary. These generated segments of code can easily be added into a payload.
 
 More modules soon.
 

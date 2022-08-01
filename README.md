@@ -182,7 +182,7 @@ python3 payloadkit.py run format.hexstring /path/to/binary.bin
 
 ### Format Int Array
 
-Uses a single argument for a filepath, reads in as bytes and writes out in the format of a C Hex string, e.g. 41,42,...
+Uses a single argument for a filepath, reads in as bytes and writes out in the format of an int array, e.g. 41,42,...
 
 Run
 ````
@@ -191,7 +191,7 @@ python3 payloadkit.py run format.intarray /path/to/binary.bin
 
 ### Format Hex Array
 
-Uses a single argument for a filepath, reads in as bytes and writes out in the format of a hex array, e.g. \\xAB,\\xCD,...
+Uses a single argument for a filepath, reads in as bytes and writes out in the format of a hex array, e.g. 0xAB,0xCD,...
 
 Run
 ````

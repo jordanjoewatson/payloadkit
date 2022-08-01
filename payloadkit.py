@@ -21,7 +21,7 @@ banner = """
 print(banner)
 
 app = typer.Typer()
-languages = ["cpp","csharp","powershell","visualbasic","cobaltstrike"]
+languages = ["cpp","csharp","powershell","visualbasic","cobaltstrike","format"]
 
 @app.command(name="run", help="Runs a module")
 def run(module: str, arg: str):

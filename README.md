@@ -22,6 +22,10 @@ More modules soon.
 - PowerShell XOR
 - Visual Basic XOR
 - Cobalt Strike DLLImports (limited imports available)
+- Format C Hex String
+- Format Hex String
+- Format Int Array
+- Format Hex Array
 
 ## Setup
 
@@ -157,4 +161,39 @@ payload: /path/to/payload.bin
 Run 
 ````
 python3 payloadkit.py run visualbasic.xor xor.yaml
+````
+
+### Format C Hex String
+
+Uses a single argument for a filepath, reads in as bytes and writes out in the format of a C Hex string, e.g. "\\xAB\\xCD..."
+
+Run
+````
+python3 payloadkit.py run format.chexstring /path/to/binary.bin
+````
+
+### Format Hex String
+
+Uses a single argument for a filepath, reads in as bytes and writes out in the format of a Hex string, e.g. "ABCD..."
+
+````
+python3 payloadkit.py run format.hexstring /path/to/binary.bin
+````
+
+### Format Int Array
+
+Uses a single argument for a filepath, reads in as bytes and writes out in the format of a C Hex string, e.g. 41,42,...
+
+Run
+````
+python3 payloadkit.py run format.intarray /path/to/binary.bin
+````
+
+### Format Hex Array
+
+Uses a single argument for a filepath, reads in as bytes and writes out in the format of a hex array, e.g. \\xAB,\\xCD,...
+
+Run
+````
+python3 payloadkit.py run format.hexarray /path/to/binary.bin
 ````

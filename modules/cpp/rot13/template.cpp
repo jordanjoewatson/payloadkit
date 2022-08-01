@@ -21,4 +21,4 @@ void rot13(unsigned char* bytes, int byteCount)
 
 unsigned char* cptr;
 cptr = intArray;
-_xor(cptr, {{ payloadSize }});
+rot13(cptr, {{ payloadSize }});

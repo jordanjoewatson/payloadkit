@@ -20,6 +20,7 @@ More modules soon.
 - C# DLLImports (limited imports available)
 - C# AES
 - PowerShell XOR
+- PowerShell Environmental Keying
 - Visual Basic XOR
 - Cobalt Strike DLLImports (limited imports available)
 - Format C Hex String
@@ -139,6 +140,22 @@ payload: /path/to/payload.bin
 Run
 ````
 python3 payloadkit.py run powershell.xor xor.yaml
+````
+
+### PowerShell Environmental Keying
+
+Compares an environment variable with an XOR'd value, to ensure something will only run on a specific device
+
+Config
+````
+key: username
+value: jord
+xorkey: art
+````
+
+Run
+````
+python3 payloadkit.py run powershell.environmentalkeying env.yml
 ````
 
 ### Cobalt Strike DllImports

